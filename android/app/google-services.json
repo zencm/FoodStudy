@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "882345371943",
+    "firebase_url": "https://foodapp-7560a.firebaseio.com",
+    "project_id": "foodapp-7560a",
+    "storage_bucket": "foodapp-7560a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882345371943:android:699a0fba6efe2038",
+        "android_client_info": {
+          "package_name": "com.foodapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882345371943-pd9mum6s1qcnjddvj0ocr53injo4605v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKrQb6OX-gOq9mCJJwpADSPFEHL8dSd5k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882345371943:android:1a65265095968a99",
+        "android_client_info": {
+          "package_name": "com.foodstudy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882345371943-pd9mum6s1qcnjddvj0ocr53injo4605v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKrQb6OX-gOq9mCJJwpADSPFEHL8dSd5k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
