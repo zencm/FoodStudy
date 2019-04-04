@@ -22,7 +22,7 @@ export default class Moopage extends Component{
 
     send = () => {
 
-        fetch('https://foodapp.ipsy1.uni-luebeck.de/Insert_Data.php/', {
+        fetch('https://beispiel.server.de/Insert_Data.php/', {
 
             method: 'POST',
             headers: {
