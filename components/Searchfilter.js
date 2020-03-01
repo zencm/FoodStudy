@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { BackHandler, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, {Component} from 'react';
+import {BackHandler, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 
-import SearchableFlatlist from "searchable-flatlist";
 import food from './foodlist';
+import SearchableFlatlist from './SearchableFlatlist';
 
 const data = food;
 
@@ -11,6 +12,7 @@ export default class Searchfilter extends Component {
         super(props);
         this.state = {
             datentime: this.props.navigation.state.params.datex,
+            date: this.props.navigation.state.params.date,
             mealtime: this.props.navigation.state.params.datey,
             persons: this.props.navigation.state.params.personz,
             searchTerm: "",
@@ -33,7 +35,7 @@ export default class Searchfilter extends Component {
         const { navigate } = this.props.navigation;
         let { sContainer, sSearchBar, sTextItem } = styles;
         return (
-            <View style={sContainer}>
+            <SafeAreaView style={sContainer}>
                 <TextInput
                     placeholder={"Suche"}
                     style={sSearchBar}
@@ -54,6 +56,7 @@ export default class Searchfilter extends Component {
                                     itemkey: item.blsKey,
                                     datexx: this.state.datentime,
                                     dateyy: this.state.mealtime,
+                                    date: this.state.date,
                                     personzz: this.state.persons,
                                 })}>
                             <Text style={sTextItem}>{item.name}</Text>
@@ -62,7 +65,7 @@ export default class Searchfilter extends Component {
                     }
 
                 />
-            </View>
+            </SafeAreaView>
         );
     }
 }

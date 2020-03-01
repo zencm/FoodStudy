@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import {
-    ActivityIndicator, Alert, AsyncStorage, BackHandler, FlatList, StyleSheet, Text, TouchableOpacity,
-    View
-} from 'react-native';
-
-import { StackActions, NavigationActions } from 'react-navigation';
+import React, {Component} from 'react';
+import {ActivityIndicator, Alert,  BackHandler, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {NavigationActions, SafeAreaView, StackActions} from 'react-navigation';
+import Config from 'react-native-config';
 
 const confood = [];
 const foodlist = [];
@@ -18,6 +16,7 @@ export default class Endpage extends Component{
             fooditem: this.props.navigation.state.params.itemnamee,
             foodkey: this.props.navigation.state.params.itemkeyy,
             datentime: this.props.navigation.state.params.datexxx,
+            date: this.props.navigation.state.params.date,
             mealtime: this.props.navigation.state.params.dateyyy,
             persons: this.props.navigation.state.params.personzzz,
             foodeaten: this.props.navigation.state.params.foodchoose,
@@ -34,32 +33,31 @@ export default class Endpage extends Component{
         navigate('Searchfilter',
             {   datex: this.state.datentime,
                 datey: this.state.mealtime,
+                date: this.state.date,
                 personz: this.state.persons,
             });
     };
 
     send = () => {
-
-        this.setState({ ActivityIndicator_Loading : true }, () => {
-            fetch('https://beispiel.server.de/Insert_Food.php/', {
-
+        this.setState({ ActivityIndicator_Loading : true }, async () => {
+            fetch(Config.API_HOST+'/api/foodstudy/food', {
+    
                 method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
+                headers: {Accept: 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ (await AsyncStorage.getItem('jwt'))},
+                
+                // bls
+                // bls_key
                 body: JSON.stringify({
-                    user_name: this.state.aUser,
-                    food_name: confood.toString(),
-                    date_time: this.state.datentime,
-                    mealtime: this.state.mealtime,
-                    amount_persons: this.state.persons,
+                    date: this.state.date,
+                    food: confood.toString(),
+                    meal_type: this.state.mealtime,
+                    people: this.state.persons,
                 })
 
             })
                 .then((response) => response.json())
                 .then((responseJsonFromServer) => {
-                    Alert.alert('Gesendet!', responseJsonFromServer);
+                    Alert.alert('Gesendet!');
                     this.done();
 
                 }).catch((error) => {
@@ -151,7 +149,7 @@ export default class Endpage extends Component{
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
 
                 <View style={[styles.boxContainer, styles.boxOne]}>
                     <Text style={styles.text}>Datum: {this.state.datentime}</Text>
@@ -189,7 +187,7 @@ export default class Endpage extends Component{
                     this.state.ActivityIndicator_Loading ? <ActivityIndicator color='#009688' size='large' style={styles.ActivityIndicatorStyle} /> : null
                 }
 
-            </View>
+            </SafeAreaView>
 
         );
     }
@@ -257,11 +255,8 @@ const styles = StyleSheet.create({
         color: '#373737',
     },
     to: {
-        flex: 1,
-        flexWrap: 'wrap',
-        alignSelf: 'stretch',
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignSelf: 'stretch', alignItems: 'center', padding: 20,
+        justifyContent: "center"
     },
     to2: {
         alignSelf: 'stretch',

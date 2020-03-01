@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {Alert, AsyncStorage, BackHandler, Picker, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-
+import {Alert, BackHandler, Picker, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import 'moment/locale/de';
+import {SafeAreaView} from 'react-navigation';
 import Searchfilter from "./Searchfilter";
 
 export default class Profile extends Component{
@@ -29,6 +30,7 @@ export default class Profile extends Component{
                 navigate('Searchfilter', {
                     datex: this.state.dateText,
                     datey: this.state.dayTime,
+                    date: this.state.cdate,
                     personz: this.state.person,
                 })
             }
@@ -70,7 +72,7 @@ export default class Profile extends Component{
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
 
                 <View style={[styles.boxContainer, styles.boxOne]}>
                     <Text style={styles.text}>Datum: {this.state.dateText}</Text>
@@ -79,7 +81,17 @@ export default class Profile extends Component{
                 </View>
 
                 <View style={[styles.boxContainer, styles.boxTwo]}>
-
+    
+                    <TouchableOpacity style={styles.to2} onPress={this._showDateTimePicker}>
+                        <Text style={styles.text}>Datum & Uhrzeit</Text>
+                    </TouchableOpacity>
+                    <DateTimePicker
+                        mode= "datetime"
+                        isVisible={this.state.isDateTimePickerVisible}
+                        onConfirm={this._handleDatePicked}
+                        onCancel={this._hideDateTimePicker}
+                    />
+                    
                     <Text style={styles.text2}>Mahlzeit:</Text>
                     <Picker
                         style={styles.pickr}
@@ -106,15 +118,7 @@ export default class Profile extends Component{
                         <Picker.Item label = "Mehr als Zwei" value = "3" />
                     </Picker>
 
-                    <TouchableOpacity style={styles.to2} onPress={this._showDateTimePicker}>
-                        <Text style={styles.text}>Datum & Uhrzeit</Text>
-                    </TouchableOpacity>
-                    <DateTimePicker
-                        mode= "datetime"
-                        isVisible={this.state.isDateTimePickerVisible}
-                        onConfirm={this._handleDatePicked}
-                        onCancel={this._hideDateTimePicker}
-                    />
+                    
 
                 </View>
 
@@ -126,7 +130,7 @@ export default class Profile extends Component{
                     </TouchableOpacity>
                 </View>
 
-            </View>
+            </SafeAreaView>
 
         );
     }
@@ -193,7 +197,7 @@ const styles = StyleSheet.create({
     text2: {
         fontSize: 18,
         alignSelf: 'stretch',
-
+marginTop: 50,
     },
     to: {
         alignSelf: 'stretch',

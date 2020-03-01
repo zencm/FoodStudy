@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import {Alert, AsyncStorage, ScrollView, Slider, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {StackActions, NavigationActions} from "react-navigation";
-import Profile from "./Profile";
+import React, {Component} from 'react';
+import {Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import Slider from '@react-native-community/slider';
 
-
+import {NavigationActions, SafeAreaView, StackActions} from 'react-navigation';
+import AsyncStorage from '@react-native-community/async-storage';
+import Config from 'react-native-config';
 
 export default class Slepage extends Component{
 
@@ -21,17 +22,13 @@ export default class Slepage extends Component{
         this.setState({aUser: value});
     }
 
-    send = () => {
+    send = async () => {
 
-        fetch('https://beispiel.server.de.de/Insert_Data.php/', {
-
+        fetch(Config.API_HOST +'/api/foodstudy/log', {
+    
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: {Accept: 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ (await AsyncStorage.getItem('jwt'))},
             body: JSON.stringify({
-                username: this.state.aUser,
                 mood: this.state.mvalue,
                 sleep: this.state.svalue,
             })
@@ -39,9 +36,13 @@ export default class Slepage extends Component{
         })
             .then((response) => response.json())
             .then((responseJsonFromServer) => {
-                Alert.alert('Gesendet!', responseJsonFromServer);
+                Alert.alert('Gesendet!');
             }).catch((error) => {
-            console.error(error);
+                console.log('req status error', error);
+                if( error.status === 401 ){
+                    // TODO: handle unauthorized
+                }
+                console.error(error);
         });
         this.ret();
 
@@ -58,7 +59,7 @@ export default class Slepage extends Component{
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
 
                 <ScrollView contentContainerStyle = {[styles.contentContainer]}>
 
@@ -113,7 +114,7 @@ export default class Slepage extends Component{
                     <Text style={styles.btntext}>Senden</Text>
                 </TouchableOpacity>
 
-            </View>
+            </SafeAreaView>
 
         );
     }
