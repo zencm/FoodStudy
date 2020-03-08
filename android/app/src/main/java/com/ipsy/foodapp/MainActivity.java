@@ -1,4 +1,4 @@
-package com.foodstudy;
+package com.ipsy.foodapp;
 
 import com.facebook.react.ReactActivity;
 

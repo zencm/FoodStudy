@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.foodstudy",
+    package = "com.ipsy.foodapp",
 )
 
 android_resource(
     name = "res",
-    package = "com.foodstudy",
+    package = "com.ipsy.foodapp",
     res = "src/main/res",
 )
 

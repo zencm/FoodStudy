@@ -1,4 +1,4 @@
-package com.foodstudy;
+package com.ipsy.foodapp;
 
 import android.app.Application;
 import android.content.Context;
