@@ -99,6 +99,7 @@ export default class Amountchoose extends Component {
 						maxLength={4}
 						onChangeText={( text ) => this.onChange(text)}
 						value={this.state.texti}
+						returnKeyType='done'
 					/>
 				
 				</View>
@@ -137,6 +138,7 @@ const styles = StyleSheet.create({
 	}, text2       : {
 		fontSize: 30, alignSelf: 'stretch', color: '#373737',
 	}, textInput   : {
+		color: '#333333',
 		alignSelf: 'stretch', fontSize: 18, borderWidth: 1, borderColor: '#000000', borderRadius: 5,
 	}, to          : {
 		alignSelf: 'stretch', alignItems: 'center', padding: 20,justifyContent: "center"

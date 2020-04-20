@@ -1,4 +1,9 @@
 {
-  "name": "FoodStudy",
-  "displayName": "FoodStudy"
+  "name": "FoodStudyApp",
+  "displayName": "FoodStudyAppApp",
+  "ios": {
+    "infoPlist": {
+      "UIUserInterfaceStyle": "Light"
+    }
+  }
 }

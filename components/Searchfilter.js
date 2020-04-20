@@ -71,6 +71,7 @@ export default class Searchfilter extends Component {
 }
 
 const styles = StyleSheet.create({
+    
     sContainer: {
         flex: 1,
         backgroundColor: "#fff",
@@ -104,5 +105,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderColor: '#000000',
         borderWidth: 3,
+    
+        color: '#333333'
+    
     }
 });

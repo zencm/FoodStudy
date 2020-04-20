@@ -74,19 +74,19 @@ export default class Profile extends Component{
         return (
             <SafeAreaView style={styles.container}>
 
-                <View style={[styles.boxContainer, styles.boxOne]}>
+                {/*<View style={[styles.boxContainer, styles.boxOne]}>
                     <Text style={styles.text}>Datum: {this.state.dateText}</Text>
                     <Text style={styles.text}>Mahlzeit: {this.state.dayTime}</Text>
                     <Text style={styles.text}>Begleitung: {this.state.person}</Text>
-                </View>
+                </View>*/}
 
-                <View style={[styles.boxContainer, styles.boxTwo]}>
+                <View style={[styles.boxContainer, styles.boxTwo, styles.mainContainer]}>
     
                     <TouchableOpacity style={styles.to2} onPress={this._showDateTimePicker}>
-                        <Text style={styles.text}>Datum & Uhrzeit</Text>
+                        <Text style={styles.text}>{ this.state.dateText ? `Datum: ${this.state.dateText}` : 'Datum & Uhrzeit'}</Text>
                     </TouchableOpacity>
                     <DateTimePicker
-                        mode= "datetime"
+                        mode="datetime"
                         isVisible={this.state.isDateTimePickerVisible}
                         onConfirm={this._handleDatePicked}
                         onCancel={this._hideDateTimePicker}
@@ -104,11 +104,10 @@ export default class Profile extends Component{
                         <Picker.Item label = "Abendbrot" value = "Abendbrot" />
                         <Picker.Item label = "Zwischenmahlzeit" value = "Zwischenmahlzeit" />
                     </Picker>
-
+    
                     <Text style={styles.text2}>Begleitung:</Text>
                     <Picker
                         style={styles.pickr}
-                        mode="dropdown"
                         selectedValue = {this.state.person}
                         onValueChange = {(person) => this.setState({ person: person })}>
                         <Picker.Item label = "" value = "" />
@@ -117,8 +116,6 @@ export default class Profile extends Component{
                         <Picker.Item label = "Zu Zweit" value = "2" />
                         <Picker.Item label = "Mehr als Zwei" value = "3" />
                     </Picker>
-
-                    
 
                 </View>
 
@@ -137,6 +134,9 @@ export default class Profile extends Component{
 }
 
 const styles = StyleSheet.create({
+                                     mainContainer:{
+                                     
+                                     },
     container: {
         flex: 1,
         flexDirection: 'column',

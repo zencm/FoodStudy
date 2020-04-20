@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.ipsy.foodapp">
+  package="net.dsea.foodstudyapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

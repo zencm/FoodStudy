@@ -60,34 +60,34 @@ export default class Login extends Component {
 		return loggedIn;
 	}
 	
-	// registration = () =>{
-	//
-	//     const { username }  = this.state ;
-	//     const { password }  = this.state ;
-	//
-	//     fetch( Config.API_HOST+'/auth/register', {
-	//         method: 'POST',
-	//         headers: {
-	//             'Accept': 'application/json',
-	//             'Content-Type': 'application/json',
-	//         },
-	//         body: JSON.stringify({
-	//             username: username,
-	//             password: password
-	//
-	//         })
-	//
-	//     }).then((response) => response.json())
-	//         .then((responseJson) => {
-	//
-	//             Alert.alert('Hinweis!', responseJson);
-	//
-	//         }).catch((error) => {
-	//         console.error(error);
-	//     });
-	//
-	//
-	// };
+	registration = () =>{
+	    //
+	    // const { username }  = this.state ;
+	    // const { password }  = this.state ;
+	    //
+	    // fetch( Config.API_HOST+'/auth/register', {
+	    //     method: 'POST',
+	    //     headers: {
+	    //         'Accept': 'application/json',
+	    //         'Content-Type': 'application/json',
+	    //     },
+	    //     body: JSON.stringify({
+	    //         username: username,
+	    //         password: password
+	    //
+	    //     })
+	    //
+	    // }).then((response) => response.json())
+	    //     .then((responseJson) => {
+	    //
+	    //         Alert.alert('Hinweis!', responseJson);
+	    //
+	    //     }).catch((error) => {
+	    //     console.error(error);
+	    // });
+
+
+	};
 	
 	login = () => {
 		
@@ -101,7 +101,7 @@ export default class Login extends Component {
 				method : 'POST', headers: {
 					Accept: 'application/json', 'Content-Type': 'application/json',
 				}, body: JSON.stringify({
-					email: this.state.username, password: this.state.password,
+					username: this.state.username, password: this.state.password,
 				}),
 			})
 				.then(( response ) => response.json())
@@ -145,7 +145,7 @@ export default class Login extends Component {
 			
 			<View style={[styles.boxContainer, styles.boxTwo]}>
 				<TextInput
-					style={styles.textInput} placeholder="Benutzername (E-Mail Adresse)"
+					style={styles.textInput} placeholder="Benutzername"
 					onChangeText={( text ) => this.setState({username: text})}
 					value={this.state.username}
 					underlineColorAndroid="transparent"
@@ -165,9 +165,9 @@ export default class Login extends Component {
 			
 			<View style={[styles.boxContainer, styles.boxThree]}>
 				
-				{/*<TouchableOpacity style={styles.to} onPress={() => this.registration()}>*/}
-				{/*<Text style={styles.btntext}>Registrieren</Text>*/}
-				{/*</TouchableOpacity>*/}
+				<TouchableOpacity style={styles.to} onPress={() => this.registration()}>
+				<Text style={styles.btntext}>Registrieren</Text>
+				</TouchableOpacity>
 				
 				<TouchableOpacity style={styles.to} onPress={() => this.login()}>
 					<Text style={styles.btntext}>Anmelden</Text>
@@ -181,7 +181,6 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
 	container      : {
-		
 		flexDirection: 'column', backgroundColor: '#fff', paddingTop: 5, paddingBottom: 5, paddingLeft: 5, paddingRight: 5,
 	}, boxContainer: {
 		
@@ -197,7 +196,7 @@ const styles = StyleSheet.create({
 	}, header      : {
 		fontSize: 30, color: '#373737', fontWeight: 'bold',
 	}, textInput   : {
-		
+		color: '#333333',
 		padding: 16, borderColor: '#000000', borderWidth: 1, marginBottom: 15,
 	}, to          : {
 		alignSelf: 'stretch', alignItems: 'center', backgroundColor: '#fff', padding: 15, opacity: 1, marginTop: 20, borderRadius: 10, borderColor: '#000000', borderWidth: 2,

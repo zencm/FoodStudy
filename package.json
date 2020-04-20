@@ -1,6 +1,6 @@
 {
-  "name": "FoodStudy",
-  "version": "0.0.2",
+  "name": "FoodStudyApp",
+  "version": "2.0.0a",
   "private": true,
   "scripts": {
     "preinstall": "node -e 'if(!/yarn\\.js$/.test(process.env.npm_execpath))throw new Error(\"Use yarn\")'",

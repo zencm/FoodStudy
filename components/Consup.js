@@ -10,7 +10,7 @@ export default class Consup extends Component{
 	constructor( props ){
 		super( props );
 		this.state = {
-			aUser: '', sleep: '', mood: '', digestion: '', url: Config.API_HOST + '/Anleitung.php', url2: Config.API_HOST + '/datenschutz.php',
+			aUser: '', sleep: '', mood: '', digestion: '', url: Config.API_HOST + '/anleitung', url2: Config.API_HOST + '/datenschutz',
 		};
 	}
 	
@@ -72,7 +72,7 @@ export default class Consup extends Component{
 					
 					<View style={ [ styles.boxContainer, styles.boxTwo ] }>
 						<TouchableOpacity onPress={ this.handleClick }>
-							<Text style={ styles.text2 }>Anleitung:</Text>
+							<Text style={ styles.text2 }>Anleitung</Text>
 							<Text style={ styles.text }>{ this.state.url }</Text>
 						</TouchableOpacity>
 					</View>
@@ -80,8 +80,7 @@ export default class Consup extends Component{
 					<View style={ [ styles.boxContainer, styles.boxTwo ] }>
 						<TouchableOpacity onPress={ this.handleClick2 }>
 							<Text style={ styles.text2 }>Kontakt</Text>
-							<Text style={ styles.text }>Phone: 0451 3101 3611</Text>
-							<Text style={ styles.text }>Email: annekatrin.muth@uni-luebeck.de</Text>
+							<Text style={ styles.text }>Email: anne-katrin.muth@dife.de</Text>
 						</TouchableOpacity>
 					</View>
 					
