@@ -16,6 +16,7 @@
     "@react-native-community/datetimepicker": "^2.2.2",
     "@react-native-community/masked-view": "^0.1.6",
     "@react-native-community/slider": "^2.0.8",
+    "fuse.js": "^5.2.3",
     "moment": "^2.22.2",
     "react": "16.9.0",
     "react-native": "0.61.5",

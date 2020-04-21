@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {BackHandler, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
-import food from './foodlist';
+// import food from './foodlist';
+const food = require( '../data/food.json');
+
 import SearchableFlatlist from './SearchableFlatlist';
 
 const data = food;
@@ -42,7 +44,7 @@ export default class Searchfilter extends Component {
                     onChangeText={searchTerm => this.setState({ searchTerm })}
                 />
                 <SearchableFlatlist
-                    searchProperty={"name"}
+                    searchProperty={'de'}
                     searchTerm={this.state.searchTerm}
                     data={data}
                     containerStyle={{ flex: 1 }}
@@ -52,14 +54,14 @@ export default class Searchfilter extends Component {
                         <TouchableOpacity
                             style={styles.to}
                             onPress={() => navigate('Amountchoose',
-                                {   itemname: item.name,
-                                    itemkey: item.blsKey,
+                                {   itemname: item.de,
+                                    itemkey: item.key,
                                     datexx: this.state.datentime,
                                     dateyy: this.state.mealtime,
                                     date: this.state.date,
                                     personzz: this.state.persons,
                                 })}>
-                            <Text style={sTextItem}>{item.name}</Text>
+                            <Text style={sTextItem}>{item.de}</Text>
                         </TouchableOpacity>
 
                     }

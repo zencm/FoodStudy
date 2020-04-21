@@ -36,7 +36,11 @@ yarn run pods
 ---
 
 ## Notes
-Please be aware that this branch introduces urgent changes to the original code where necessary only, and does not reflect the opinions, ideologies and especially not ui/ux approaches of the current author in any way. 
+Please be aware this branch introduces urgent changes to the original code where necessary only, and does not reflect the opinions, ideologies and especially not ui/ux approaches of the current author in any way. 
+
+## Food Data
+This app uses data based on to the "Bundeslebensmittelschlüssel". While that exact data is not required, the expected data structure can be found in `data/food.example.json`. The data itself must be placed into `data/food.json`. 
+
 
 
 ## Contributing
