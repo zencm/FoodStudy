@@ -1,14 +1,13 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import React from 'react';
-import {Image} from 'react-native';
+import { Image } from 'react-native';
 
 import Config from 'react-native-config';
 import OneSignal from 'react-native-onesignal';
 
 
-import {createAppContainer, withNavigation} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Amountchoose from './components/Amountchoose';
 import Consup from './components/Consup';
 import Digpage from './components/Digpage';
@@ -22,6 +21,7 @@ import Moopage from './components/Moopage';
 import Profile from './components/Profile';
 import Searchfilter from './components/Searchfilter';
 import Slepage from './components/Slepage';
+import signup from './components/signup';
 
 
 
@@ -47,9 +47,17 @@ const TabNavigator = createBottomTabNavigator({
 	},
 });
 
-const RootStack = createStackNavigator({
-	Login: Login, Searchfilter: Searchfilter, Amountchoose: Amountchoose, TabNavigator: TabNavigator, Endpage: Endpage, Digpage: Digpage, Moopage: Moopage, Slepage: Slepage,
-}, {
+const RootStack = createStackNavigator( {
+	                                        Login: Login,
+	                                        Searchfilter: Searchfilter,
+	                                        Amountchoose: Amountchoose,
+	                                        TabNavigator: TabNavigator,
+	                                        Endpage: Endpage,
+	                                        Digpage: Digpage,
+	                                        Moopage: Moopage,
+	                                        Slepage: Slepage,
+											signup
+                                        }, {
 	headerMode: 'none', initialRouteName: 'Login',
 });
 

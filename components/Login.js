@@ -61,6 +61,10 @@ export default class Login extends Component {
 	}
 	
 	registration = () =>{
+		
+		this.props.navigation.navigate('signup');
+		
+		
 	    //
 	    // const { username }  = this.state ;
 	    // const { password }  = this.state ;
@@ -165,12 +169,13 @@ export default class Login extends Component {
 			
 			<View style={[styles.boxContainer, styles.boxThree]}>
 				
-				<TouchableOpacity style={styles.to} onPress={() => this.registration()}>
-				<Text style={styles.btntext}>Registrieren</Text>
-				</TouchableOpacity>
-				
 				<TouchableOpacity style={styles.to} onPress={() => this.login()}>
 					<Text style={styles.btntext}>Anmelden</Text>
+				</TouchableOpacity>
+				
+				
+				<TouchableOpacity style={styles.to} onPress={() => this.registration()}>
+				<Text style={styles.btntext}>Registrieren</Text>
 				</TouchableOpacity>
 			
 			</View>

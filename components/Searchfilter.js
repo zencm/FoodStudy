@@ -41,6 +41,7 @@ export default class Searchfilter extends Component {
                 <TextInput
                     placeholder={"Suche"}
                     style={sSearchBar}
+                    autoCorrect={false}
                     onChangeText={searchTerm => this.setState({ searchTerm })}
                 />
                 <SearchableFlatlist

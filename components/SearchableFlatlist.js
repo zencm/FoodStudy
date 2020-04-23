@@ -18,7 +18,7 @@ export default class SearchableFlatlist extends Component{
 			const options = {
 				includeScore: true,
 				useExtendedSearch: true,
-				threshold: .2,
+				threshold: .45,
 				distance: 80,
 				// findAllMatches: true,
 				keys: [searchProperty],
