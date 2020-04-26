@@ -47,6 +47,8 @@ export default class Consup extends Component{
 		await AsyncStorage.removeItem( 'jwt' );
 		await AsyncStorage.removeItem( 'user' );
 		
+		this.setState({username: '', password: ''});
+		
 		this.props.navigation.navigate( 'Login' );
 	};
 	

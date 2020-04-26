@@ -2,10 +2,10 @@ import React from 'react';
 import { Image } from 'react-native';
 
 import Config from 'react-native-config';
-import OneSignal from 'react-native-onesignal';
+// import OneSignal from 'react-native-onesignal';
 
 
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, SafeAreaView } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Amountchoose from './components/Amountchoose';
@@ -67,7 +67,7 @@ export default class App extends React.Component {
 	constructor( properties ){
 		super(properties);
 		
-		OneSignal.init(Config.ONE_SIGNAL_ID, {kOSSettingsKeyAutoPrompt: true});
+		// OneSignal.init(Config.ONE_SIGNAL_ID, {kOSSettingsKeyAutoPrompt: true});
 		
 	}
 	

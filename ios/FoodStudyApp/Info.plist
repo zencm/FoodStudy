@@ -37,12 +37,20 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Die Kamera wird zum Scannen von Barcodes verwendet.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Standort-Informationen werden zur statistischen Auswertung verwendet.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Standort-Informationen werden zur statistischen Auswertung verwendet.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Es wird kein Ton aufgezeichnet.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Die Kamera wird zum Scannen von Barcodes verwendet.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Die Kamera wird zum Scannen von Barcodes verwendet.</string>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
+	<array/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -60,22 +68,5 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Standort-Informationen werden zur statistischen Auswertung verwendet.</string>
-
-	<key>NSCameraUsageDescription</key>
-	<string>Die Kamera wird zum Scannen von Barcodes verwendet.</string>
-
-	<!-- Required with iOS 11 and higher: include this only if you are planning to use the camera roll -->
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Die Kamera wird zum Scannen von Barcodes verwendet.</string>
-
-	<!-- Include this only if you are planning to use the camera roll -->
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Die Kamera wird zum Scannen von Barcodes verwendet.</string>
-
-	<!-- Include this only if you are planning to use the microphone for video recording -->
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Es werden kein Ton aufgezeichnet.</string>
 </dict>
 </plist>

@@ -6,6 +6,54 @@ import {SafeAreaView} from 'react-navigation';
 
 export default class Login extends Component {
 	
+	
+	render(){
+		return (<SafeAreaView style={styles.container}>
+			
+			<View style={[styles.boxContainer, styles.boxOne]}>
+				<Text style={styles.header}>- Willkommen -</Text>
+			</View>
+			
+			<View style={[styles.boxContainer, styles.boxTwo]}>
+				<TextInput
+					style={styles.textInput} placeholder="Benutzername"
+					onChangeText={( text ) => this.setState({username: text})}
+					value={this.state.username}
+					underlineColorAndroid="transparent"
+					
+					autoCorrect={false}
+					autoCapitalize='none' textContentType='username'
+				/>
+				
+				<TextInput
+					style={styles.textInput} placeholder="Passwort"
+					onChangeText={( text ) => this.setState({password: text})}
+					secureTextEntry={true} underlineColorAndroid='transparent'
+					
+					autoCorrect={false}
+					autoCapitalize='none' textContentType='password'
+					onSubmitEditing={this.login}
+				/>
+			</View>
+			
+			<View style={[styles.boxContainer, styles.boxThree]}>
+				<TouchableOpacity style={styles.to} onPress={() => this.login()}>
+					<Text style={styles.btntext}>Anmelden</Text>
+				</TouchableOpacity>
+			</View>
+			
+			<View style={[styles.boxContainer,{marginTop:50,marginBottom:50}]}>
+				<TouchableOpacity onPress={() => this.registration()}>
+					<Text>Registrieren</Text>
+				</TouchableOpacity>
+			
+			</View>
+		
+		</SafeAreaView>);
+	}
+	
+	
+	
 	constructor( props ){
 		super(props);
 		this.state = {
@@ -31,6 +79,7 @@ export default class Login extends Component {
 	};
 	
 	async checkLogin( redirectOnFail = false ){
+		
 		// this.navigation.navigate('Login');
 		const token = await AsyncStorage.getItem('jwt');
 		if( !token )
@@ -108,7 +157,7 @@ export default class Login extends Component {
 					username: this.state.username, password: this.state.password,
 				}),
 			})
-				.then(( response ) => response.json())
+				.then(( response ) => response.json() )
 				.then(async ( responseJson ) => {
 					
 					if( !responseJson || !responseJson['access_token']){
@@ -128,6 +177,8 @@ export default class Login extends Component {
 						AsyncStorage.setItem('user', user.name)
 					);
 					
+					this.setState({username: '', password: ''});
+					
 					this.props.navigation.navigate('Profile');
 					
 					
@@ -140,48 +191,7 @@ export default class Login extends Component {
 		
 	};
 	
-	render(){
-		return (<SafeAreaView style={styles.container}>
-			
-			<View style={[styles.boxContainer, styles.boxOne]}>
-				<Text style={styles.header}>- Willkommen -</Text>
-			</View>
-			
-			<View style={[styles.boxContainer, styles.boxTwo]}>
-				<TextInput
-					style={styles.textInput} placeholder="Benutzername"
-					onChangeText={( text ) => this.setState({username: text})}
-					value={this.state.username}
-					underlineColorAndroid="transparent"
-					
-					autoCapitalize={'none'} autoCompleteType={'username'} autoCorrect={false}
-				/>
-				
-				<TextInput
-					style={styles.textInput} placeholder="Passwort"
-					onChangeText={( text ) => this.setState({password: text})}
-					secureTextEntry={true} underlineColorAndroid='transparent'
-					
-					autoCapitalize={'none'} autoCompleteType={'password'} autoCorrect={false}
-					onSubmitEditing={this.login}
-				/>
-			</View>
-			
-			<View style={[styles.boxContainer, styles.boxThree]}>
-				
-				<TouchableOpacity style={styles.to} onPress={() => this.login()}>
-					<Text style={styles.btntext}>Anmelden</Text>
-				</TouchableOpacity>
-				
-				
-				<TouchableOpacity style={styles.to} onPress={() => this.registration()}>
-				<Text style={styles.btntext}>Registrieren</Text>
-				</TouchableOpacity>
-			
-			</View>
-		
-		</SafeAreaView>);
-	}
+	
 }
 
 const styles = StyleSheet.create({
