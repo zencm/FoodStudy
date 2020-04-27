@@ -255,14 +255,14 @@ const styles = StyleSheet.create({
         color: '#373737',
     },
     to: {
-        alignSelf: 'stretch', alignItems: 'center', padding: 20,
+        alignSelf: 'stretch', alignItems: 'center', padding: 0,
         justifyContent: "center"
     },
     to2: {
         alignSelf: 'stretch',
         alignItems: 'center',
         backgroundColor: '#373737',
-        padding: 20,
+        padding: 0,
         marginBottom: 18,
         borderRadius: 5,
         borderColor: '#000000',
@@ -271,10 +271,12 @@ const styles = StyleSheet.create({
     ftext: {
         fontSize: 20,
         color: '#fff',
+        padding: 10
     },
     btntext: {
         fontSize: 20,
         color: '#373737',
+        padding: 10
     },
     ActivityIndicatorStyle:{
 

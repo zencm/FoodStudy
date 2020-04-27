@@ -141,8 +141,8 @@ const styles = StyleSheet.create({
 		color: '#333333',
 		alignSelf: 'stretch', fontSize: 18, borderWidth: 1, borderColor: '#000000', borderRadius: 5,
 	}, to          : {
-		alignSelf: 'stretch', alignItems: 'center', padding: 20,justifyContent: "center"
+		alignSelf: 'stretch', alignItems: 'center', padding: 0,justifyContent: "center"
 	}, btntext     : {
-		fontSize: 20, color: '#373737',
+		fontSize: 20, color: '#373737', padding: 20
 	},
 });

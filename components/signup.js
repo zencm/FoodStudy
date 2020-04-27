@@ -1,18 +1,18 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React, { Component } from 'react';
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView,  } from 'react-native';
 import Config from 'react-native-config';
 import Spinner from 'react-native-loading-spinner-overlay';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { SafeAreaView } from 'react-navigation';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const B = ( props ) => <Text style={ { fontWeight: 'bold' } }>{ props.children }</Text>;
 
 export default class Signup extends Component{
 	
 	render(){
-		if( !this.state.manualEntry && !this.state.credentials )
+		if( !this.state.manualEntry && !this.state.key )
 			return (
 				<QRCodeScanner
 					onRead={ this.onRead }
@@ -27,8 +27,8 @@ export default class Signup extends Component{
 					}
 					bottomContent={
 						<View style={ [ styles.boxContainer, styles.boxOne ] }>
-							<TouchableOpacity style={ [ styles.to, styles.buttonTouchable, { marginTop: 20, marginBottom: 40 } ] } onPress={ () => this.toggleManual() }>
-								<Text style={ styles.buttonText }>Code manuell eingeben</Text>
+							<TouchableOpacity style={ [ styles.to, { marginTop: 20, marginBottom: 40 } ] } onPress={ () => this.toggleManual() }>
+								<Text style={styles.btntext}>Code manuell eingeben</Text>
 							</TouchableOpacity>
 							<TouchableOpacity onPress={ () => this.cancel() }>
 								<Text>abbrechen</Text>
@@ -42,7 +42,8 @@ export default class Signup extends Component{
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		if( !this.state.credentials )
-			return ( <SafeAreaView style={ styles.container }>
+			return ( <KeyboardAwareScrollView style={ styles.container } contentInsetAdjustmentBehavior="automatic">
+				<SafeAreaView style={ { flex: 1 }}>
 					<Spinner visible={this.state?.busy}/>
 					<View style={ [ styles.boxContainer, styles.boxOne ] }>
 						<Text style={ styles.header }>- Registrierung -</Text>
@@ -113,12 +114,15 @@ export default class Signup extends Component{
 					</View>
 				
 				</SafeAreaView>
+				</KeyboardAwareScrollView>
 			);
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		return ( <SafeAreaView style={ styles.container }>
+		return (
+			<KeyboardAwareScrollView style={ styles.container } contentInsetAdjustmentBehavior="automatic" >
+			<SafeAreaView style={ { flex: 1 }}>
 				<Spinner visible={this.state?.busy}/>
 				<View style={ [ styles.boxContainer, styles.boxOne, {marginBottom: 0} ] }>
 					<Text style={ styles.header }>- Registrierung -</Text>
@@ -172,6 +176,7 @@ export default class Signup extends Component{
 				</View>
 			
 			</SafeAreaView>
+			</KeyboardAwareScrollView>
 		);
 	}
 	
@@ -244,7 +249,6 @@ export default class Signup extends Component{
 			return;
 		
 		this.setState( { key, response });
-		
 		this.loadSignup();
 		
 		// Linking.openURL(e.data).catch(err =>
@@ -274,10 +278,17 @@ export default class Signup extends Component{
 		} )
 			.then( ( response ) => response.json() )
 			.then( async responseJson => {
+				if( !responseJson || !responseJson['study'] ){
+					this.setState( { study: null, busy: false } );
+					Alert.alert('Es ist keine entsprechende Studie verfügbar.');
+					return;
+				}
+				
 				this.setState( { study: responseJson['study'], busy: false} );
 				
 			} ).catch( async error => {
 				this.setState( { study: null, busy: false } );
+				Alert.alert('Es ist keine entsprechende Studie verfügbar.');
 			} );
 		
 	}
@@ -357,7 +368,8 @@ export default class Signup extends Component{
 
 const styles = StyleSheet.create( {
 	                                  container: {
-		                                  flexDirection: 'column', backgroundColor: '#fff', paddingTop: 5, paddingBottom: 5, paddingLeft: 5, paddingRight: 5,
+	                                  	flex: 1,
+		                                   backgroundColor: '#fff', paddingTop: 5, paddingBottom: 5, paddingLeft: 5, paddingRight: 5,
 	                                  }, boxContainer: {
 		
 		alignItems: 'center', justifyContent: 'space-between', paddingTop: 5, paddingBottom: 5, paddingLeft: 5, paddingRight: 5, borderRadius: 5, opacity: 5,
@@ -377,8 +389,7 @@ const styles = StyleSheet.create( {
 	}, to: {
 		alignSelf: 'stretch', alignItems: 'center', backgroundColor: '#fff', padding: 15, opacity: 1, marginTop: 20, borderRadius: 10, borderColor: '#000000', borderWidth: 2,
 	}, btntext: {
-		fontSize: 20, color: '#373737', fontWeight: 'bold',
-		
+		fontSize: 14, color: '#373737', fontWeight: 'bold', padding: 15, marginTop: -15
 	},
                                   } );
 

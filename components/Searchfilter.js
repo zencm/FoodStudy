@@ -82,8 +82,9 @@ const styles = StyleSheet.create({
     to: {
         alignSelf: 'auto',
         alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: "#373737",
-        padding: 10,
+        padding: 0,
         margin: 10,
         marginTop: 10,
         borderRadius: 5,
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     },
     sTextItem: {
         height: 50,
+        padding: 10,
         width: "100%",
         textAlign: "center",
         textAlignVertical: "center",
