@@ -1,30 +1,77 @@
-import React, {Component} from 'react';
-import {ActivityIndicator, Alert,  BackHandler, FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import {NavigationActions, SafeAreaView, StackActions} from 'react-navigation';
+import React, { Component } from 'react';
+import { ActivityIndicator, Alert, BackHandler, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Config from 'react-native-config';
+import { NavigationActions, SafeAreaView, StackActions } from 'react-navigation';
 
-const confood = [];
-const foodlist = [];
+
+let foodlist = [];
 
 export default class Endpage extends Component{
-
+    
+    render() {
+        return (
+            <SafeAreaView style={styles.container}>
+                
+                <View style={[styles.boxContainer, styles.boxOne]}>
+                    <Text style={styles.text}>Datum: {this.state.datentime}</Text>
+                    <Text style={styles.text}>Mahlzeit: {this.state.mealtime}</Text>
+                    <Text style={styles.text}>Begleitung: {this.state.persons}</Text>
+                </View>
+                
+                <View style={[styles.boxContainer, styles.boxTwo]}>
+                    <FlatList
+                        data={this.state.foodeaten}
+                        extraData={this.state}
+                        containerStyle={{ flex: 1 }}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={({item}) =>
+                            <TouchableOpacity style={styles.foodEntry} onPress={() => this.delete(item)}>
+                                <Text style={styles.ftext}>{item.name}</Text>
+                                <Text style={[styles.ftext, styles.quantityLabel]}>( {item.quantity}g/ml ) </Text>
+                            </TouchableOpacity>
+                        }
+                    />
+                
+                </View>
+                
+                <View style={[styles.boxContainer, styles.boxThree]}>
+                    <TouchableOpacity style={styles.to} onPress={() => this.more()}>
+                        <Text style={styles.btntext}>Mehr hinzufügen...</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.to} onPress={() => this.send()}>
+                        <Text style={styles.btntext}>SENDEN!</Text>
+                    </TouchableOpacity>
+                </View>
+                
+                { this.state.ActivityIndicator_Loading &&
+                  <ActivityIndicator color='#009688' size='large' style={styles.ActivityIndicatorStyle} />
+                }
+            
+            </SafeAreaView>
+        
+        );
+    }
+    
+    
     constructor(props){
         super(props);
         this.state = {
             aUser: '',
-            fooditem: this.props.navigation.state.params.itemnamee,
-            foodkey: this.props.navigation.state.params.itemkeyy,
             datentime: this.props.navigation.state.params.datexxx,
             date: this.props.navigation.state.params.date,
             mealtime: this.props.navigation.state.params.dateyyy,
             persons: this.props.navigation.state.params.personzzz,
+            
+            fooditem: this.props.navigation.state.params.itemnamee,
+            foodkey: this.props.navigation.state.params.itemkeyy,
+            
             foodeaten: this.props.navigation.state.params.foodchoose,
             foodamount: this.props.navigation.state.params.amfood,
-            keyf: '',
-            foodsplit: '',
+            
             ActivityIndicator_Loading: false,
             wait: false,
+            
         };
     }
 
@@ -39,6 +86,8 @@ export default class Endpage extends Component{
     };
 
     send = () => {
+        let food = foodlist.map( f => ({k: f.key, q: f.quantity}) );
+        
         this.setState({ ActivityIndicator_Loading : true }, async () => {
             fetch(Config.API_HOST+'/api/foodstudy/food', {
     
@@ -49,9 +98,9 @@ export default class Endpage extends Component{
                 // bls_key
                 body: JSON.stringify({
                     date: this.state.date,
-                    food: confood.toString(),
                     meal_type: this.state.mealtime,
                     people: this.state.persons,
+                    data: food,
                 })
 
             })
@@ -67,44 +116,26 @@ export default class Endpage extends Component{
     };
 
     done = () => {
-
-        for (let i = 0; i < confood.length; i++) {
-            confood.splice(i);
-            foodlist.splice(i);
-        }
-
-        if (this.state.mealtime === 'Fruehstueck'){
-            const resetAction = StackActions.reset({
+    
+        foodlist = [];
+	    this.setState({foodeaten:foodlist});
+	    
+        const resetAction = StackActions.reset(
+            {
                 index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'Slepage' })],
-            });
-            this.props.navigation.dispatch(resetAction);
-        }
-
-        if (this.state.mealtime === 'Abendbrot'){
-            const resetAction = StackActions.reset({
-                index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'Digpage' })],
-            });
-            this.props.navigation.dispatch(resetAction);
-        }
-
-        if (this.state.mealtime === 'Mittagessen' || this.state.mealtime === 'Zwischenmahlzeit'){
-            const resetAction = StackActions.reset({
-                index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'Moopage' })],
-            });
-            this.props.navigation.dispatch(resetAction);
-        }
-
+                actions: [ NavigationActions.navigate( { routeName: 'Questions' } ) ],
+            },
+        );
+        this.props.navigation.dispatch(resetAction);
+        
     };
 
     delete = (item) => {
         Alert.alert (
             'Achtung!',
-            'Wollen Sie ' + item.toString() + ' wirklich löschen?',
+            'Wollen Sie ' + item.name + ' wirklich löschen?',
             [
-                {text: 'Abbrechen', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'Abbrechen', onPress: () => null, style: 'cancel'},
                 {text: 'Löschen', onPress: () => this.deleteItem(item)},
             ],
             { cancelable: true }
@@ -112,30 +143,24 @@ export default class Endpage extends Component{
     };
 
     deleteItem = (item) => {
-
-        for (let i = 0; i < foodlist.length; i++) {
-            if (foodlist[i] === item){
-                foodlist.splice(i,1);
-                confood.splice(i,1);
-            }
-        }
+        foodlist = foodlist.filter( f => f.key !== item.key );
         this.setState({foodeaten:foodlist});
-
     };
 
     comb = () => {
-        let x = this.state.foodamount + '_';
-        let y = this.state.foodkey;
-        let res = x.concat(y);
-        confood.push(res);
+        if( !this.state.foodkey )
+            return;
+        
+        foodlist.push({key: this.state.foodkey, quantity: this.state.foodamount, name: this.state.fooditem });
+        this.setState({foodeaten:foodlist});
     };
 
     async componentDidMount(){
         BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
-        foodlist.push(this.state.foodeaten);
+        // foodlist = this.state.foodeaten;
         this.comb();
-        let value = await AsyncStorage.getItem('user');
-        this.setState({aUser: value});
+        // let value = await AsyncStorage.getItem('user');
+        // this.setState({aUser: value});
     }
 
     componentWillUnmount() {
@@ -147,50 +172,7 @@ export default class Endpage extends Component{
     };
 
 
-    render() {
-        return (
-            <SafeAreaView style={styles.container}>
-
-                <View style={[styles.boxContainer, styles.boxOne]}>
-                    <Text style={styles.text}>Datum: {this.state.datentime}</Text>
-                    <Text style={styles.text}>Mahlzeit: {this.state.mealtime}</Text>
-                    <Text style={styles.text}>Begleitung: {this.state.persons}</Text>
-                </View>
-
-                <View style={[styles.boxContainer, styles.boxTwo]}>
-                    <FlatList
-                        data={foodlist}
-                        extraData={this.state}
-                        containerStyle={{ flex: 1 }}
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={({item}) =>
-
-                            <TouchableOpacity style={styles.to2} onPress={() => this.delete(item)}>
-                                <Text style={styles.ftext}>{item}</Text>
-                            </TouchableOpacity>
-
-                        }
-                    />
-
-                </View>
-
-                <View style={[styles.boxContainer, styles.boxThree]}>
-                    <TouchableOpacity style={styles.to} onPress={() => this.more()}>
-                        <Text style={styles.btntext}>Mehr hinzufügen...</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.to} onPress={() => this.send()}>
-                        <Text style={styles.btntext}>SENDEN!</Text>
-                    </TouchableOpacity>
-                </View>
-
-                {
-                    this.state.ActivityIndicator_Loading ? <ActivityIndicator color='#009688' size='large' style={styles.ActivityIndicatorStyle} /> : null
-                }
-
-            </SafeAreaView>
-
-        );
-    }
+    
 }
 
 const styles = StyleSheet.create({
@@ -258,7 +240,9 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch', alignItems: 'center', padding: 0,
         justifyContent: "center"
     },
-    to2: {
+    foodEntry: {
+        flexDirection: 'row',
+        justifyContent: 'center',
         alignSelf: 'stretch',
         alignItems: 'center',
         backgroundColor: '#373737',
@@ -268,6 +252,11 @@ const styles = StyleSheet.create({
         borderColor: '#000000',
         borderWidth: 1,
     },
+    quantityLabel: {
+        fontSize: 14,
+        fontStyle: 'italic'
+    },
+    
     ftext: {
         fontSize: 20,
         color: '#fff',

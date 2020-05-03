@@ -42,7 +42,7 @@ export default class Amountchoose extends Component {
 		
 		if ( this.state.texti !== '' ){
 			let strInt = this.state.texti.toString();
-			let foodStr = strInt + 'g (ml) ' + (this.state.fooditem);
+			let foodStr = this.state.fooditem;
 			navigate('Endpage', {
 				itemnamee: this.state.fooditem,
 				itemkeyy: this.state.foodkey,
@@ -50,6 +50,7 @@ export default class Amountchoose extends Component {
 				date: this.state.date,
 				dateyyy: this.state.mealtime,
 				personzzz: this.state.persons,
+				
 				amfood: strInt,
 				foodchoose: foodStr,
 			});
@@ -90,7 +91,10 @@ export default class Amountchoose extends Component {
 				
 				<View style={[styles.boxContainer, styles.boxTwo]}>
 					
-					<Text style={styles.text2}>{this.state.texti2}g (ml) für {this.state.fooditem}</Text>
+					<View>
+						<Text style={[styles.text2,{textAlign: 'center'}]}>Menge für {this.state.fooditem}</Text>
+						<Text style={[styles.text2,{textAlign: 'center', marginTop: 10}]}>{this.state.texti2} ( g/ml ) </Text>
+					</View>
 					
 					<TextInput
 						style={styles.textInput}
@@ -100,6 +104,7 @@ export default class Amountchoose extends Component {
 						onChangeText={( text ) => this.onChange(text)}
 						value={this.state.texti}
 						returnKeyType='done'
+						autoFocus={true}
 					/>
 				
 				</View>
@@ -129,7 +134,7 @@ const styles = StyleSheet.create({
 	}, boxOne      : {
 		flex: 2, alignItems: 'stretch', backgroundColor: '#fff', justifyContent: 'space-around', paddingTop: 5, paddingBottom: 5, paddingLeft: 15, paddingRight: 15, borderColor: '#000000', borderWidth: 1, marginBottom: 5,
 	}, boxTwo      : {
-		flex: 6, alignItems: 'stretch', justifyContent: 'space-around', backgroundColor: '#fff', paddingTop: 15, paddingBottom: 15, paddingLeft: 40, paddingRight: 40, borderColor: '#000000', borderWidth: 1, marginBottom: 5,
+		flex: 6, alignItems: 'stretch', justifyContent: 'center', backgroundColor: '#fff', paddingTop: 15, paddingBottom: 15, paddingLeft: 40, paddingRight: 40, borderColor: '#000000', borderWidth: 1, marginBottom: 5,
 	}, boxThree    : {
 		flex: 1, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#fff', borderWidth: 2, borderColor: '#000000', borderRadius: 25,
 		
@@ -139,7 +144,7 @@ const styles = StyleSheet.create({
 		fontSize: 30, alignSelf: 'stretch', color: '#373737',
 	}, textInput   : {
 		color: '#333333',
-		alignSelf: 'stretch', fontSize: 18, borderWidth: 1, borderColor: '#000000', borderRadius: 5,
+		alignSelf: 'stretch', fontSize: 18, borderWidth: 1, borderColor: '#000000', borderRadius: 5, padding: 10, marginTop: 50
 	}, to          : {
 		alignSelf: 'stretch', alignItems: 'center', padding: 0,justifyContent: "center"
 	}, btntext     : {

@@ -39,10 +39,11 @@ export default class Searchfilter extends Component {
         return (
             <SafeAreaView style={sContainer}>
                 <TextInput
-                    placeholder={"Suche"}
+                    placeholder={"Suche nach Nahrungsmittel"}
                     style={sSearchBar}
                     autoCorrect={false}
                     onChangeText={searchTerm => this.setState({ searchTerm })}
+                    autoFocus={true}
                 />
                 <SearchableFlatlist
                     searchProperty={'de'}

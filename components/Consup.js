@@ -10,31 +10,22 @@ export default class Consup extends Component{
 	constructor( props ){
 		super( props );
 		this.state = {
-			aUser: '', sleep: '', mood: '', digestion: '', url: Config.API_HOST + '/anleitung', url2: Config.API_HOST + '/datenschutz',
+			urlInstructions: Config.API_HOST + '/anleitung',
+			urlPrivacy: Config.API_HOST + '/privacy'
 		};
 	}
 	
 	async componentDidMount(){
-		let value = await AsyncStorage.getItem( 'user' );
-		this.setState( { aUser: value } );
+		// let value = await AsyncStorage.getItem( 'user' );
+		// this.setState( { aUser: value } );
 	}
 	
-	handleClick = () => {
-		Linking.canOpenURL( this.state.url ).then( supported => {
+	handleClick = ( url ) => {
+		Linking.canOpenURL( url ).then( supported => {
 			if( supported ){
-				Linking.openURL( this.state.url );
+				Linking.openURL( url );
 			}else{
-				console.log( 'Don\'t know how to open URI: ' + this.state.url );
-			}
-		} );
-	};
-	
-	handleClick2 = () => {
-		Linking.canOpenURL( this.state.url2 ).then( supported => {
-			if( supported ){
-				Linking.openURL( this.state.url2 );
-			}else{
-				console.log( 'Don\'t know how to open URI: ' + this.state.url2 );
+				console.log( 'Don\'t know how to open URI: ' + url );
 			}
 		} );
 	};
@@ -52,15 +43,6 @@ export default class Consup extends Component{
 		this.props.navigation.navigate( 'Login' );
 	};
 	
-	// logout = () => {
-	//     this.setState({aUser: ''});
-	//     AsyncStorage.setItem('user','');
-	//     const { navigate } = this.props.navigation;
-	//     navigate('Login', {
-	//         aUser: '',
-	//     })
-	// };
-	
 	render(){
 		return ( <SafeAreaView style={ styles.container }>
 				
@@ -73,9 +55,15 @@ export default class Consup extends Component{
 					</View>
 					
 					<View style={ [ styles.boxContainer, styles.boxTwo ] }>
-						<TouchableOpacity onPress={ this.handleClick }>
+						<TouchableOpacity onPress={ ()=>this.handleClick( this.state.urlInstructions ) }>
 							<Text style={ styles.text2 }>Anleitung</Text>
-							<Text style={ styles.text }>{ this.state.url }</Text>
+							<Text style={ styles.text }>{ this.state.urlInstructions }</Text>
+						</TouchableOpacity>
+					</View>
+					<View style={ [ styles.boxContainer, styles.boxTwo ] }>
+						<TouchableOpacity onPress={ ()=>this.handleClick( this.state.urlPrivacy ) }>
+							<Text style={ styles.text2 }>Datenschutz</Text>
+							<Text style={ styles.text }>{ this.state.urlPrivacy }</Text>
 						</TouchableOpacity>
 					</View>
 					
@@ -86,15 +74,6 @@ export default class Consup extends Component{
 						</TouchableOpacity>
 					</View>
 					
-					
-					{/*<View style={[styles.boxContainer, styles.boxTwo]}>*/ }
-					{/*<TouchableOpacity onPress={this.logout}>*/ }
-					{/*<Text style={styles.text2}>{this.state.aUser}</Text>*/ }
-					{/*<Text style={styles.text2}>Logout</Text>*/ }
-					{/*</TouchableOpacity>*/ }
-					{/*</View>*/ }
-				
-				
 				</ScrollView>
 			
 			
@@ -108,7 +87,7 @@ const styles = StyleSheet.create(
 	{
 		contentContainer: {
 			paddingVertical: 20,
-			
+			paddingHorizontal: 10,
 		},
 		container: {},
 		boxContainer: {

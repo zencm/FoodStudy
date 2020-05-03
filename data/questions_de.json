@@ -1,0 +1,97 @@
+[
+	{
+		"key": "aengstlich",
+		"question": "Wie ängstlich fühlen Sie sich heute?",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "gar nicht", "maxLabel": "äußerst"},
+		"rep": "daily"
+	},
+	{
+		"key": "freudig",
+		"question": "Wie freudig erregt fühlen Sie sich heute?",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "gar nicht", "maxLabel": "äußerst"},
+		"rep": "daily"
+	},
+	{
+		"key": "optimistisch",
+		"question": "Ich habe mich in Bezug auf die Zukunft optimistisch gefühlt",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "niemals", "maxLabel": "immer"},
+		"rep": "daily"
+	},
+	{
+		"key": "nuetzlich",
+		"question": "Ich habe mich nützlich gefühlt.",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "niemals", "maxLabel": "immer"},
+		"rep": "daily"
+	},
+	{
+		"key": "entspannt",
+		"question": "Ich habe mich entspannt gefühlt.",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "niemals", "maxLabel": "immer"},
+		"rep": "daily"
+	},
+	{
+		"key": "umgegang_probleme",
+		"question": "Ich bin mit Problemen gut umgegangen.",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "niemals", "maxLabel": "immer"},
+		"rep": "daily"
+	},
+	{
+		"key": "klar_denken",
+		"question": "Ich konnte klar denken.",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "niemals", "maxLabel": "immer"},
+		"rep": "daily"
+	},
+	{
+		"key": "nahe_gefuehlt",
+		"question": "Ich habe mich anderen Menschen nahe gefühlt.",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "niemals", "maxLabel": "immer"},
+		"rep": "daily"
+	},
+	{
+		"key": "entscheidungen_treffen",
+		"question": "Ich war in der Lage Entscheidungen zu treffen.",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "niemals", "maxLabel": "immer"},
+		"rep": "daily"
+	},
+	{
+		"key": "guter_schlaf",
+		"question": "Wie gut haben Sie letzte Nacht geschlafen?",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "gar nicht", "maxLabel": "äußerst"},
+		"rep": "daily"
+	},
+
+	{
+		"key": "koerperlich_aktiv",
+		"question": "Wie körperlich aktiv waren Sie heute?",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "gar nicht", "maxLabel": "äußerst"},
+		"rep": "daily"
+	},
+
+	{
+		"key": "sozialen_interaktionen",
+		"question": "Wie viele sozialen Interaktionen hatten Sie heute?",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "gar keine", "maxLabel": "ständig"},
+		"rep": "daily"
+	},
+
+	{
+		"key": "qualitaet_kontakte",
+		"question": "Wie schätzen Sie die Qualität der sozialen Kontakte ein?",
+		"type": "slider",
+		"config": {"min": 1,"max": 5, "minLabel": "gar nicht", "maxLabel": "äußerst"},
+		"rep": "daily"
+	}
+
+]

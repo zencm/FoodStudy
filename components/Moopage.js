@@ -8,7 +8,46 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Config from 'react-native-config';
 
 export default class Moopage extends Component{
-
+    
+    render() {
+        return (
+            <SafeAreaView style={styles.container}>
+                <ScrollView contentContainerStyle = {[styles.contentContainer]}>
+                    
+                    <View style={[styles.boxContainer, styles.boxTwo]}>
+                        
+                        <Text style={styles.textf}>Stimmung {this.state.mvalue}</Text>
+                        
+                        <View style={[styles.boxContainer, styles.boxThree]}>
+                            <Slider
+                                style={{ flex: 1 }}
+                                step={1}
+                                minimumValue={0}
+                                maximumValue={100}
+                                value={this.state.mvalue}
+                                onValueChange={val => this.setState({ mvalue: val })}
+                                onSlidingComplete={ val => this.setState({ mvalue: val })}
+                            />
+                        </View>
+                        
+                        <View style={[styles.boxContainer, styles.boxThree]}>
+                            <Text style={styles.text}>Sehr schlecht</Text>
+                            <Text style={styles.text}>Sehr gut</Text>
+                        </View>
+                    
+                    </View>
+                </ScrollView>
+                
+                <TouchableOpacity style={styles.to} onPress={() => this.send()}>
+                    <Text style={styles.btntext}>Senden</Text>
+                </TouchableOpacity>
+            
+            </SafeAreaView>
+        
+        );
+    }
+    
+    
     constructor(props){
         super(props);
         this.state = {
@@ -52,43 +91,6 @@ export default class Moopage extends Component{
 
     };
 
-    render() {
-        return (
-            <SafeAreaView style={styles.container}>
-                <ScrollView contentContainerStyle = {[styles.contentContainer]}>
-
-                    <View style={[styles.boxContainer, styles.boxTwo]}>
-
-                        <Text style={styles.textf}>Stimmung {this.state.mvalue}</Text>
-
-                        <View style={[styles.boxContainer, styles.boxThree]}>
-                            <Slider
-                                style={{ flex: 1 }}
-                                step={1}
-                                minimumValue={0}
-                                maximumValue={100}
-                                value={this.state.mvalue}
-                                onValueChange={val => this.setState({ mvalue: val })}
-                                onSlidingComplete={ val => this.setState({ mvalue: val })}
-                            />
-                        </View>
-
-                        <View style={[styles.boxContainer, styles.boxThree]}>
-                            <Text style={styles.text}>Sehr schlecht</Text>
-                            <Text style={styles.text}>Sehr gut</Text>
-                        </View>
-
-                    </View>
-                </ScrollView>
-
-                <TouchableOpacity style={styles.to} onPress={() => this.send()}>
-                    <Text style={styles.btntext}>Senden</Text>
-                </TouchableOpacity>
-
-            </SafeAreaView>
-
-        );
-    }
 }
 
 const styles = StyleSheet.create({

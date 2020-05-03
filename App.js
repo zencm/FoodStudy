@@ -19,6 +19,7 @@ import help from './components/icons/help.png';
 import Login from './components/Login';
 import Moopage from './components/Moopage';
 import Profile from './components/Profile';
+import QuestionView from './components/QuestionView';
 import Searchfilter from './components/Searchfilter';
 import Slepage from './components/Slepage';
 import signup from './components/signup';
@@ -53,9 +54,10 @@ const RootStack = createStackNavigator( {
 	                                        Amountchoose: Amountchoose,
 	                                        TabNavigator: TabNavigator,
 	                                        Endpage: Endpage,
-	                                        Digpage: Digpage,
-	                                        Moopage: Moopage,
-	                                        Slepage: Slepage,
+	                                        Questions: QuestionView,
+	                                        // Digpage: Digpage,
+	                                        // Moopage: Moopage,
+	                                        // Slepage: Slepage,
 											signup
                                         }, {
 	headerMode: 'none', initialRouteName: 'Login',

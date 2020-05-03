@@ -119,10 +119,8 @@ export default class Profile extends Component{
 
                 </View>
 
-                <View style={[styles.boxContainer, styles.boxThree]}>
-                    <TouchableOpacity
-                        style={styles.to}
-                        onPress={() => this.pruef()}>
+                <View style={[styles.boxThree]}>
+                    <TouchableOpacity style={styles.to} onPress={() => this.pruef()}>
                         <Text style={styles.btntext}>WEITER</Text>
                     </TouchableOpacity>
                 </View>
@@ -184,11 +182,11 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     boxThree: {
-        flex: 1,
         borderWidth: 2,
         backgroundColor: "#ffffff",
         borderColor: '#000000',
         borderRadius: 25,
+        padding: 0,
     },
     text: {
         fontSize: 18,
@@ -197,12 +195,12 @@ const styles = StyleSheet.create({
     text2: {
         fontSize: 18,
         alignSelf: 'stretch',
-marginTop: 50,
+        marginTop: 50,
     },
     to: {
         alignSelf: 'stretch',
         alignItems: 'center',
-        padding: 20,
+        padding: 0,
     },
     to2: {
         alignItems: 'center',
@@ -217,6 +215,7 @@ marginTop: 50,
         fontSize: 20,
         justifyContent:'center',
         color: '#373737',
+        padding: 20,
     },
     pickr: {
         alignSelf: 'stretch',
