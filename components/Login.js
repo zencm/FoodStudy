@@ -5,6 +5,7 @@ import Config from 'react-native-config';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { SafeAreaView } from 'react-navigation';
+import { FSService } from '../services/food-study.service';
 
 
 export default class Login extends Component{
@@ -12,51 +13,51 @@ export default class Login extends Component{
 	
 	render(){
 		return ( <KeyboardAwareScrollView style={ styles.container } contentInsetAdjustmentBehavior="automatic">
-			<SafeAreaView style={ { flex: 1 } }>
-				<Spinner visible={ this.state?.busy } />
-				
-				
-				<View style={ [ styles.boxContainer, styles.boxOne ] }>
-					<Text style={ styles.header }>- Willkommen -</Text>
-				</View>
-				
-				<View style={ [ styles.boxContainer, styles.boxTwo ] }>
-					<TextInput
-						style={ styles.textInput } placeholder="Benutzername"
-						onChangeText={ ( text ) => this.setState( { username: text } ) }
-						value={ this.state.username }
-						underlineColorAndroid="transparent"
-						
-						autoCorrect={ false }
-						autoCapitalize='none' textContentType='username'
-					/>
+				<SafeAreaView style={ { flex: 1 } }>
+					<Spinner visible={ this.state?.busy } />
 					
-					<TextInput
-						style={ styles.textInput } placeholder="Passwort"
-						onChangeText={ ( text ) => this.setState( { password: text } ) }
-						secureTextEntry={ true } underlineColorAndroid='transparent'
+					
+					<View style={ [ styles.boxContainer, styles.boxOne ] }>
+						<Text style={ styles.header }>- Willkommen -</Text>
+					</View>
+					
+					<View style={ [ styles.boxContainer, styles.boxTwo ] }>
+						<TextInput
+							style={ styles.textInput } placeholder="Benutzername"
+							onChangeText={ ( text ) => this.setState( { username: text } ) }
+							value={ this.state.username }
+							underlineColorAndroid="transparent"
+							
+							autoCorrect={ false }
+							autoCapitalize='none' textContentType='username'
+						/>
 						
-						autoCorrect={ false }
-						autoCapitalize='none' textContentType='password'
-						onSubmitEditing={ this.login }
-					/>
-				</View>
+						<TextInput
+							style={ styles.textInput } placeholder="Passwort"
+							onChangeText={ ( text ) => this.setState( { password: text } ) }
+							secureTextEntry={ true } underlineColorAndroid='transparent'
+							
+							autoCorrect={ false }
+							autoCapitalize='none' textContentType='password'
+							onSubmitEditing={ this.login }
+						/>
+					</View>
+					
+					<View style={ [ styles.boxContainer, styles.boxThree ] }>
+						<TouchableOpacity style={ styles.to } onPress={ () => this.login() }>
+							<Text style={ styles.btntext }>Anmelden</Text>
+						</TouchableOpacity>
+					</View>
+					
+					<View style={ [ styles.boxContainer, { marginTop: 50, marginBottom: 50 } ] }>
+						<TouchableOpacity onPress={ () => this.registration() }>
+							<Text>Registrieren</Text>
+						</TouchableOpacity>
+					
+					</View>
 				
-				<View style={ [ styles.boxContainer, styles.boxThree ] }>
-					<TouchableOpacity style={ styles.to } onPress={ () => this.login() }>
-						<Text style={ styles.btntext }>Anmelden</Text>
-					</TouchableOpacity>
-				</View>
-				
-				<View style={ [ styles.boxContainer, { marginTop: 50, marginBottom: 50 } ] }>
-					<TouchableOpacity onPress={ () => this.registration() }>
-						<Text>Registrieren</Text>
-					</TouchableOpacity>
-				
-				</View>
-			
-			</SafeAreaView>
-		</KeyboardAwareScrollView>
+				</SafeAreaView>
+			</KeyboardAwareScrollView>
 		);
 	}
 	
@@ -75,48 +76,21 @@ export default class Login extends Component{
 	}
 	
 	_loadInitilalState = async () => {
-		
-		const loggedIn = await this.checkLogin();
-		if( loggedIn )
-			this.props.navigation.navigate( 'Profile' );
-		
-		// const value = await AsyncStorage.getItem('user');
-		// if ( value !== null ){
-		// 	this.props.navigation.navigate('Profile');
-		// }
-		
-	};
-	
-	async checkLogin( redirectOnFail = false ){
-		
-		// this.navigation.navigate('Login');
-		const token = await AsyncStorage.getItem( 'jwt' );
-		if( !token )
-			return false;
-		
-		let loggedIn = false;
-		
-		await fetch( Config.API_HOST + '/api/auth/me', {
-			method: 'POST', headers: {
-				Accept: 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token,
-			},
-		} )
-			.then( ( response ) => response.json() )
-			.then( async responseJson => {
-				loggedIn = responseJson['id'];
-				await AsyncStorage.setItem( 'user', responseJson['name'] );
-				
-			} ).catch( async error => {
-				await AsyncStorage.removeItem( 'jwt' );
-				await AsyncStorage.removeItem( 'user' );
-			} );
-		
-		if( !loggedIn && redirectOnFail ){
-			this.props.navigation.navigate( 'Login' );
+		this.setState( { busy: true } );
+		try{
+			const loggedIn = await FSService.checkLogin();
+			this.setState( { busy: false } );
+			if( loggedIn )
+				this.props.navigation.navigate( 'Profile' );
+			
+		}catch(e){
+			this.setState( { busy: false } );
 		}
 		
-		return loggedIn;
-	}
+		// else
+		// 	this.props.navigation.navigate( 'Login' );
+		
+	};
 	
 	registration = () => {
 		
@@ -151,7 +125,35 @@ export default class Login extends Component{
 		
 	};
 	
-	login = () => {
+	login = async () => {
+		
+		let username = this.state?.username?.trim();
+		let password = this.state?.password?.trim();
+		
+		if( !username?.length || !password?.length ){
+			Alert.alert( 'Hinweis!', 'Bitte Benutzernamen und Passwort eingeben' );
+			return;
+		}
+		
+		this.setState( { busy: true } );
+		
+		const loggedIn = await FSService.login( this.state.username, this.state.password )
+		                                .catch( error => {
+			                                setTimeout(()=>{
+				                                Alert.alert( 'Fehler beim Login', error.message );
+			                                }, 100);
+		                                } );
+		
+		this.setState( { busy: false } );
+		
+		if( !!loggedIn ){
+			setTimeout(()=>{
+				this.props.navigation.navigate( 'Profile' );
+			}, 10);
+		}
+		
+		
+		/*
 		
 		if( ( this.state.username === '' && this.state.password === '' )
 		    || ( this.state.username === '' && this.state.password !== '' )
@@ -201,7 +203,7 @@ export default class Login extends Component{
 			} );
 			
 			
-		}
+		}*/
 		
 	};
 	

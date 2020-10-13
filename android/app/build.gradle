@@ -145,8 +145,8 @@ android {
         applicationId "net.dsea.foodstudyapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9
-        versionName "2.0.2"
+        versionCode 11
+        versionName "2.0.4"
         missingDimensionStrategy 'react-native-camera', 'mlkit','general'
         multiDexEnabled true
     }

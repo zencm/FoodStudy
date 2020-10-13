@@ -17,9 +17,9 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* FoodStudyAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FoodStudyAppTests.m */; };
 		4F2C26F8EE85CF95A29511F7 /* libPods-FoodStudyApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D90855C6EC61558DED95D13 /* libPods-FoodStudyApp-tvOS.a */; };
-		6CFBC3348B5A49272250CF75 /* libPods-FoodStudyAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 719AFCDCBEEC1810C7F0CC4F /* libPods-FoodStudyAppTests.a */; };
 		9923BF933A76D71DA2E2679B /* libPods-FoodStudyApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B51D8DD42A62632BAA9B83D1 /* libPods-FoodStudyApp.a */; };
 		A5C8B8D7177B1BC3048C23FD /* libPods-FoodStudyApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1B6FA2348B891AB815CEAB9 /* libPods-FoodStudyApp-tvOSTests.a */; };
+		EC13CD1CCD8BE182479C76A0 /* libPods-FoodStudyApp-FoodStudyAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5CAD619C744CB9553F36C2 /* libPods-FoodStudyApp-FoodStudyAppTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,9 +56,10 @@
 		219012AE6BCB0C743029C4B5 /* Pods-FoodStudyApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodStudyApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-FoodStudyApp-tvOSTests/Pods-FoodStudyApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* FoodStudyApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FoodStudyApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FoodStudyApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FoodStudyApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		719AFCDCBEEC1810C7F0CC4F /* libPods-FoodStudyAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodStudyAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		33F6F501970691EB4E6D05FF /* Pods-FoodStudyApp-FoodStudyAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodStudyApp-FoodStudyAppTests.release.xcconfig"; path = "Target Support Files/Pods-FoodStudyApp-FoodStudyAppTests/Pods-FoodStudyApp-FoodStudyAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		7D90855C6EC61558DED95D13 /* libPods-FoodStudyApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodStudyApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90E1AAC52EED3B3A4D6826C3 /* Pods-FoodStudyApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodStudyApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-FoodStudyApp-tvOS/Pods-FoodStudyApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		9364A1960DE8543741E40125 /* Pods-FoodStudyApp-FoodStudyAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodStudyApp-FoodStudyAppTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodStudyApp-FoodStudyAppTests/Pods-FoodStudyApp-FoodStudyAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ADB7DF57242E2DBD0094B938 /* FoodStudyApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = FoodStudyApp.entitlements; path = FoodStudyApp/FoodStudyApp.entitlements; sourceTree = "<group>"; };
 		B51D8DD42A62632BAA9B83D1 /* libPods-FoodStudyApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodStudyApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD138C471B0851BF55E359C9 /* Pods-FoodStudyAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodStudyAppTests.release.xcconfig"; path = "Target Support Files/Pods-FoodStudyAppTests/Pods-FoodStudyAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F1B6FA2348B891AB815CEAB9 /* libPods-FoodStudyApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodStudyApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA5CAD619C744CB9553F36C2 /* libPods-FoodStudyApp-FoodStudyAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodStudyApp-FoodStudyAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CFBC3348B5A49272250CF75 /* libPods-FoodStudyAppTests.a in Frameworks */,
+				EC13CD1CCD8BE182479C76A0 /* libPods-FoodStudyApp-FoodStudyAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +148,7 @@
 				B51D8DD42A62632BAA9B83D1 /* libPods-FoodStudyApp.a */,
 				7D90855C6EC61558DED95D13 /* libPods-FoodStudyApp-tvOS.a */,
 				F1B6FA2348B891AB815CEAB9 /* libPods-FoodStudyApp-tvOSTests.a */,
-				719AFCDCBEEC1810C7F0CC4F /* libPods-FoodStudyAppTests.a */,
+				FA5CAD619C744CB9553F36C2 /* libPods-FoodStudyApp-FoodStudyAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -195,6 +197,8 @@
 				219012AE6BCB0C743029C4B5 /* Pods-FoodStudyApp-tvOSTests.release.xcconfig */,
 				1D6FADC6614372E7970C2472 /* Pods-FoodStudyAppTests.debug.xcconfig */,
 				BD138C471B0851BF55E359C9 /* Pods-FoodStudyAppTests.release.xcconfig */,
+				9364A1960DE8543741E40125 /* Pods-FoodStudyApp-FoodStudyAppTests.debug.xcconfig */,
+				33F6F501970691EB4E6D05FF /* Pods-FoodStudyApp-FoodStudyAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -210,6 +214,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				1055C202EDEAA960C4B7B92C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,6 +236,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				94F03187ECEAC532BC9E02E4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -378,6 +384,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		1055C202EDEAA960C4B7B92C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodStudyApp-FoodStudyAppTests/Pods-FoodStudyApp-FoodStudyAppTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodStudyApp-FoodStudyAppTests/Pods-FoodStudyApp-FoodStudyAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -407,11 +431,29 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FoodStudyAppTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-FoodStudyApp-FoodStudyAppTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94F03187ECEAC532BC9E02E4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodStudyApp/Pods-FoodStudyApp-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodStudyApp/Pods-FoodStudyApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A0A495B76A93D82AB2395CC2 /* [CP] Check Pods Manifest.lock */ = {
@@ -585,7 +627,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D6FADC6614372E7970C2472 /* Pods-FoodStudyAppTests.debug.xcconfig */;
+			baseConfigurationReference = 9364A1960DE8543741E40125 /* Pods-FoodStudyApp-FoodStudyAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -608,7 +650,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD138C471B0851BF55E359C9 /* Pods-FoodStudyAppTests.release.xcconfig */;
+			baseConfigurationReference = 33F6F501970691EB4E6D05FF /* Pods-FoodStudyApp-FoodStudyAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -632,12 +674,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FoodStudyApp/FoodStudyApp.entitlements;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = J2994VK9G3;
 				INFOPLIST_FILE = FoodStudyApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -656,11 +698,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FoodStudyApp/FoodStudyApp.entitlements;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = J2994VK9G3;
 				INFOPLIST_FILE = FoodStudyApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

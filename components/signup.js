@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Spinner from 'react-native-loading-spinner-overlay';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { SafeAreaView } from 'react-navigation';
+import { FSService, useFSService } from '../services/food-study.service';
 
 
 const B = ( props ) => <Text style={ { fontWeight: 'bold' } }>{ props.children }</Text>;
@@ -50,8 +51,8 @@ export default class Signup extends Component{
 							<Text style={ styles.header }>- Registrierung -</Text>
 							
 							{ !this.state.study &&
-							  <TouchableOpacity style={ [ styles.buttonTouchable, { marginTop: 20 } ] } onPress={ () => this.toggleManual() }>
-								  <Text style={ styles.buttonText }>(oder hier drücken um einen QR Code zu scannen)</Text>
+							  <TouchableOpacity style={ [ styles.toS, { marginTop: 20 } ] } onPress={ () => this.toggleManual() }>
+								  <Text style={ styles.btntext }>QR Code scannen</Text>
 							  </TouchableOpacity>
 							}
 						</View>
@@ -65,14 +66,14 @@ export default class Signup extends Component{
 							
 							  <View style={ [ styles.boxContainer, styles.boxOne ] }>
 								  <TextInput
-									  style={ [styles.textInput, {width: 300}] } placeholder="Teilnehmerkennung"
+									  style={ [ styles.textInput, { width: 300 } ] } placeholder="Teilnehmerkennung"
 									  onChangeText={ ( text ) => this.setState( { participant: text } ) }
 									  value={ this.state.participant }
 									  underlineColorAndroid="transparent"
 									  autoCorrect={ false } autoCapitalize={ 'none' }
 								  />
-								  <Text style={{fontSize:12,fontStyle:'italic', marginBottom:10}}>Bitte hier die Teilnehmerkennung eintragen sofern vorhanden.</Text>
-								  
+								  <Text style={ { fontSize: 12, fontStyle: 'italic', marginBottom: 10 } }>Bitte hier die Teilnehmerkennung eintragen sofern vorhanden.</Text>
+								
 								  <TouchableOpacity style={ [ styles.to, styles.buttonTouchable, { marginTop: 20 } ] } onPress={ () => this.performSignup() }>
 									  <Text style={ styles.buttonText }>Ja - Zugang freischalten</Text>
 								  </TouchableOpacity>
@@ -199,7 +200,7 @@ export default class Signup extends Component{
 			username: '', password: '', participant: null,
 			key: '', response: '',
 			study: null, credentials: null,
-			manualEntry: false,
+			manualEntry: true,
 			busy: false,
 		};
 		
@@ -210,42 +211,11 @@ export default class Signup extends Component{
 	}
 	
 	_loadInitilalState = async () => {
-		const loggedIn = await this.checkLogin();
+		const loggedIn = await FSService.checkLogin();
 		if( loggedIn )
 			this.props.navigation.navigate( 'Profile' );
 		
 	};
-	
-	async checkLogin( redirectOnFail = false ){
-		// this.navigation.navigate('Login');
-		const token = await AsyncStorage.getItem( 'jwt' );
-		if( !token )
-			return false;
-		
-		let loggedIn = false;
-		
-		await fetch( Config.API_HOST + '/api/auth/me', {
-			method: 'POST', headers: {
-				Accept: 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token,
-			},
-		} )
-			.then( ( response ) => response.json() )
-			.then( async responseJson => {
-				loggedIn = responseJson['id'];
-				await AsyncStorage.setItem( 'user', responseJson['name'] );
-				
-			} ).catch( async error => {
-				await AsyncStorage.removeItem( 'jwt' );
-				await AsyncStorage.removeItem( 'user' );
-			} );
-		
-		if( !loggedIn && redirectOnFail ){
-			this.props.navigation.navigate( 'Login' );
-		}
-		
-		return loggedIn;
-	}
-	
 	
 	
 	cancel(){
@@ -316,18 +286,22 @@ export default class Signup extends Component{
 		const response = this.state.response;
 		const participant = this.state.participant;
 		
-		if( !participant && !ignoreEmptyParticipant ){
+		// we require a participant ID for now
+		const participantRequired = true;
+		
+		if( !participant && !ignoreEmptyParticipant && !participantRequired ){
 			Alert.alert(
 				'Teilnehmerkennung',
-				'Es wurde keine Teilnehmerkennung eingegeben. Soll der Zugang ohne Kennung freigeschaltet werden?',
+				'Es wurde keine Teilnehmerkennung eingegeben.',
 				[
-					{ text: 'OHNE Kennung fortfahren', onPress: () => this.performSignup( true ) },
+					// { text: 'OHNE Kennung fortfahren', onPress: () => this.performSignup( true ) },
 					{ text: 'Kennung eingeben', onPress: () => this.setState( { busy: false } ), style: 'cancel' },
 				],
 				{ cancelable: false },
 			);
 			return;
 		}
+		
 		
 		await fetch( Config.API_HOST + '/api/study/signup', {
 			method: 'POST', headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
@@ -342,58 +316,29 @@ export default class Signup extends Component{
 			} );
 	}
 	
-	login = () => {
+	login = async () => {
 		
-		if( ( this.state.username === '' && this.state.password === ''
-		    ) || ( this.state.username === '' && this.state.password !== ''
-		    ) || ( this.state.password === '' && this.state.username !== ''
-		    )
+		return ;
+		/*let username = this.state?.username?.trim();
+		let password = this.state?.password?.trim();
 		
-		){
+		if( !username?.length || !password?.length ){
 			Alert.alert( 'Hinweis!', 'Bitte Benutzernamen und Passwort eingeben' );
-		}else{
-			this.setState( { busy: true } );
-			
-			fetch( Config.API_HOST + '/api/auth/login', {
-				method: 'POST', headers: {
-					Accept: 'application/json', 'Content-Type': 'application/json',
-				}, body: JSON.stringify( {
-					                         username: this.state.username, password: this.state.password,
-				                         } ),
-			} )
-				.then( ( response ) => response.json() )
-				.then( async ( responseJson ) => {
-					
-					if( !responseJson || !responseJson['access_token'] ){
-						this.setState( { busy: false } );
-						Alert.alert( 'Fehler beim Login', responseJson.error );
-						return;
-					}
-					const token = responseJson['access_token'];
-					
-					const user = await fetch( Config.API_HOST + '/api/auth/me', {
-						method: 'POST', headers: {
-							Accept: 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token,
-						},
-					} ).then( ( response ) => response.json() );
-					
-					await Promise.all(
-						AsyncStorage.setItem( 'jwt', token ),
-						AsyncStorage.setItem( 'user', user.name ),
-					);
-					
-					this.setState( { busy: false } );
-					this.props.navigation.navigate( 'Profile' );
-					
-					
-					
-				} ).catch( ( error ) => {
-				this.setState( { busy: false } );
-				console.error( error );
-				Alert.alert( 'Fehler beim Login', error.error );
-			} );
+			return;
 		}
 		
+		this.setState( { busy: true } );
+		
+		const loggedIn = await useFSService().login( this.state.username, this.state.password )
+		                           .catch( error => {
+			                           Alert.alert( 'Fehler beim Login', error.error );
+		                           } );
+		
+		this.setState( { busy: false } );
+		
+		if( loggedIn )
+			this.props.navigation.navigate( 'Profile' );
+		*/
 	};
 	
 }
@@ -418,6 +363,8 @@ const styles = StyleSheet.create( {
 	}, textInput: {
 		color: '#333333',
 		padding: 16, borderColor: '#000000', borderWidth: 1, marginBottom: 15,
+	}, toS: {
+		alignSelf: 'center', alignItems: 'center', backgroundColor: '#fff', padding: 5, paddingTop: 20, opacity: 1, marginTop: 20, borderRadius: 10, borderColor: '#000000', borderWidth: 2,
 	}, to: {
 		alignSelf: 'stretch', alignItems: 'center', backgroundColor: '#fff', padding: 15, opacity: 1, marginTop: 20, borderRadius: 10, borderColor: '#000000', borderWidth: 2,
 	}, btntext: {
