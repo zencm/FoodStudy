@@ -1,5 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
+import moment from 'moment';
+// import { Notifications } from 'react-native-notifications';
 // import OneSignal from 'react-native-onesignal';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -17,7 +19,6 @@ import QuestionView from './components/QuestionView';
 import Searchfilter from './components/Searchfilter';
 import signup from './components/signup';
 import { FSProvider } from './services/food-study.service';
-
 
 
 const TabNavigator = createBottomTabNavigator( {
@@ -71,15 +72,36 @@ const RootStack = createStackNavigator( {
 const AppContainer = createAppContainer( RootStack );
 
 export default class App extends React.Component{
-	constructor( properties ){
-		super( properties );
+	
+	constructor( props ){
+		super( props );
 		
-		// OneSignal.init(Config.ONE_SIGNAL_ID, {kOSSettingsKeyAutoPrompt: true});
+		// Notifications.registerRemoteNotifications();
 		
+		/*Notifications.events().registerNotificationReceivedForeground( ( notification:Notification, completion ) => {
+			console.log( `Notification received in foreground: ${ notification.title } : ${ notification.body }` );
+			completion( { alert: false, sound: false, badge: false } );
+		} );
+		
+		Notifications.events().registerNotificationOpened( ( notification:Notification, completion ) => {
+			console.log( `Notification opened: ${ notification.payload }` );
+			completion();
+		} );*/
 	}
 	
-	componentDidMount(){
 	
+	async componentDidMount(){
+		/*const fireDate = moment().add('30', 'seconds').toDate();
+		// const permissions = await Notifications.ios.checkPermissions();
+		let localNotification = Notifications.postLocalNotification( {
+			                                                             // fireDate: fireDate.toISOString(),
+			                                                             body: "Local notification!",
+			                                                             title: "Local Notification Title",
+			                                                             // sound: "chime.aiff",
+			                                                             silent: false,
+			                                                             // category: "SOME_CATEGORY",
+		                                                             } );*/
+		
 	}
 	
 	

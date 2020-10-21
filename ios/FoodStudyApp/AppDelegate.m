@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+//#import "RNNotifications.h"
+
 #import "AppDelegate.h"
 
 #import <React/RCTBridge.h>
@@ -12,6 +14,7 @@
 #import <React/RCTRootView.h>
 
 @implementation AppDelegate
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -27,6 +30,9 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+//  [RNNotifications startMonitorNotifications];
+  
   return YES;
 }
 
@@ -38,5 +44,14 @@
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
+
+//
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+//  [RNNotifications didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+//}
+//
+//- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+//  [RNNotifications didFailToRegisterForRemoteNotificationsWithError:error];
+//}
 
 @end

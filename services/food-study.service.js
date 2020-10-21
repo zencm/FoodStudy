@@ -24,6 +24,28 @@ export const FSProvider = ( props ) => {
 class FSServiceClass{
 	_studyData:null;
 	
+	async _axiosHeaders( authToken = null ){
+		let conf = {
+			headers: {
+				// 'Content-Type': 'application/json',
+				Accept: 'application/json'
+			}
+		};
+		
+		if( authToken )
+			if( typeof authToken === 'string' ){
+				conf.headers.Authorization = `Bearer ${authToken}`;
+			}else if( authToken === true ){
+				const token = await this._bearer(false);
+				if( !token )
+					return null;
+				conf.headers.Authorization = `Bearer ${token}`;
+			}
+		
+		return conf;
+		
+	}
+	
 	async _bearer( asHeader = false ){
 		const token:string = await AsyncStorage.getItem( 'jwt' );
 		if( !token )
@@ -55,7 +77,7 @@ class FSServiceClass{
 		
 		// TODO: limit retrieval to when the remote has more recent data only
 		
-		const bearer = await this._bearer( true );
+		const bearer = await this._axiosHeaders( true );
 		if( !bearer )
 			return null;
 		
@@ -75,7 +97,7 @@ class FSServiceClass{
 	
 	async checkLogin(){
 		
-		const bearer = await this._bearer( true );
+		const bearer = await this._axiosHeaders( true );
 		if( !bearer )
 			return false;
 		
@@ -102,8 +124,7 @@ class FSServiceClass{
 	
 	
 	async login( username:string, password:string ){
-		
-		const response = await axios.post( Config.API_HOST + '/api/auth/login', { username, password } ).then( r => r.data );
+		const response = await axios.post( Config.API_HOST + '/api/auth/login', { username, password }, await this._axiosHeaders() ).then( r => r.data );
 		
 		if( !response || response?.error )
 			throw new Error( 'Fehler beim Login: ' + response.error );
@@ -112,7 +133,7 @@ class FSServiceClass{
 		if( !token )
 			throw new Error( 'Fehler beim Login' );
 		
-		const config = { headers: { Authorization: `Bearer ${ token }` } };
+		const config = await this._axiosHeaders(token);
 		const user = await axios.post( Config.API_HOST + '/api/auth/me', null, config ).then( r => r?.data );
 		
 		await Promise.all(
