@@ -151,7 +151,7 @@ export default class Signup extends Component{
 						
 						<Text style={ { marginTop: 20, marginBottom: 20, fontWeight: 'bold' } }>Bitte bewahren Sie diese Daten sicher auf!</Text>
 						<Text style={ { fontStyle: 'italic', fontSize: 12 } }>(…z.B. notieren oder Screenshot). Aus Gründen der Sicherheit können diese nicht wiederhergestellt werden. Zur Bestätigung bitte das Passwort unten
-							bestaetigen.</Text>
+							eingeben.</Text>
 					
 					</View>
 					
@@ -318,8 +318,7 @@ export default class Signup extends Component{
 	
 	login = async () => {
 		
-		return ;
-		/*let username = this.state?.username?.trim();
+		let username = this.state?.username?.trim();
 		let password = this.state?.password?.trim();
 		
 		if( !username?.length || !password?.length ){
@@ -329,16 +328,18 @@ export default class Signup extends Component{
 		
 		this.setState( { busy: true } );
 		
-		const loggedIn = await useFSService().login( this.state.username, this.state.password )
-		                           .catch( error => {
-			                           Alert.alert( 'Fehler beim Login', error.error );
-		                           } );
+		const loggedIn = await FSService.login( this.state.username, this.state.password )
+		                                .catch( error => {
+			                                setTimeout(()=>{
+				                                Alert.alert( 'Fehler beim Login', error.message );
+			                                }, 100);
+		                                } );
 		
 		this.setState( { busy: false } );
 		
 		if( loggedIn )
 			this.props.navigation.navigate( 'Profile' );
-		*/
+		
 	};
 	
 }
